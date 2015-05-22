@@ -10,7 +10,7 @@ test:
   pre:
     - autoconf
     - ./configure
-    - make
+    - make all
   override:
     - make test
   post:
