@@ -16,7 +16,7 @@ test:
   post:
     - sudo checkinstall -y --pkgversion 2.x make install
     - dpkg -x fish_2.x-1_amd64.deb tmp
-    - rm fish_2.x-1_amd64.deb
+    - rm -f fish_2.x-1_amd64.deb
     - mv tmp/usr usr
     - fpm -s dir -t deb -n fish -v `git describe --tags` -d libncurses5 -d gettext usr
     - cp *.deb $CIRCLE_ARTIFACTS
