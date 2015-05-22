@@ -14,7 +14,7 @@ test:
   override:
     - make test
   post:
-    - checkinstall -y --pkgversion 2.x make install
+    - sudo checkinstall -y --pkgversion 2.x make install
     - dpkg -x fish_2.x-1_amd64.deb tmp
     - mv tmp/usr usr
     - fpm -s dir -t deb -n fish -v `git describe --tags` -d libncurses5 -d gettext usr
