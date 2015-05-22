@@ -18,7 +18,7 @@ test:
     - dpkg -x fish_2.x-1_amd64.deb tmp
     - rm -f fish_2.x-1_amd64.deb
     - mv tmp/usr usr
-    - fpm -s dir -t deb -n fish -v `git describe --tags` -d libncurses5 -d gettext usr
+    - fpm -s dir -t deb -n fish -v `git describe --tags` --maintainer "Chris Olstrom <chris@olstrom.com>" --description "fish is a smart and user-friendly command line shell for OS X, Linux, and the rest of the family. fish includes features like syntax highlighting, autosuggest-as-you-type, and fancy tab completions that just work, with no configuration required." --url "http://fishshell.com/" -d libncurses5 -d gettext usr
     - cp *.deb $CIRCLE_ARTIFACTS
 deployment:
   package:
