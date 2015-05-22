@@ -1,0 +1,25 @@
+---
+checkout:
+  post:
+    - git fetch --unshallow || true
+dependencies:
+  post:
+    - gem install fpm package_cloud
+test:
+  pre:
+    - autoconf
+    - ./configure
+    - make
+  override:
+    - make test
+  post:
+    - strip fish
+    - mkdir -p usr/bin
+    - mv fish usr/bin
+    - fpm -s dir -t deb -n fish -v `git describe --tags` -d libncurses5 -d gettext usr
+    - cp *.deb $CIRCLE_ARTIFACTS
+deployment:
+  package:
+    branch: master
+    commands:
+      - package_cloud push colstrom/fish/ubuntu/precise `ls -1 *.deb`
